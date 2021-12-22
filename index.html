@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="pages/index.css">
+    <title>Mesto</title>
+</head>
+
+<body>
+    <div class="page">
+        <div class="header">
+            <img src="./images/logo.svg" alt="Логотип" class="header__logo">
+        </div>
+
+        <div class="main">
+            <div class="profile">
+                <div class="profile__avatar-container">
+                    <img src="./images/Cousteau.jpg" alt="Жак-Ив Кусто" class="profile__avatar">
+                </div>
+                <div class="profile__info">
+                    <h2 class="profile__title">Жак-Ив Кусто</h2>
+                    <p class="profile__subtitle">Исследователь океана</p>
+
+                    <button class="profile__button profile__button-edit"></button>
+
+                </div>
+
+                <button class="profile__button profile__button-add"></button>
+                
+            </div>
+
+            <ul class="elements">
+                <li class="elements__element">
+                    <div class="elements__image-container">
+                        <img src="./images/Karachaevsk.jpg" alt="Карачаевск" class="elements__image">
+                    </div>
+                    <div class="elements__subtitle-container">
+                        <p class="elements__subtitle">
+                            Карачаевск
+                        </p>
+                        <div class="elements__like-container"></div>
+                    </div>
+                </li>
+                <li class="elements__element">
+                    <div class="elements__image-container">
+                        <img src="./images/Elbrus.png" alt="Эльбрус" class="elements__image">
+                    </div>
+                    <div class="elements__subtitle-container">
+                        <p class="elements__subtitle">
+                            Гора Эльбрус
+                        </p>
+                        <div class="elements__like-container"></div>
+                    </div>
+                </li>
+                <li class="elements__element">
+                    <div class="elements__image-container">
+                        <img src="./images/Dombay.png" alt="Домбай" class="elements__image">
+                    </div>
+                    <div class="elements__subtitle-container">
+                        <p class="elements__subtitle">
+                            Домбай
+                        </p>
+                        <div class="elements__like-container"></div>
+                    </div>
+                </li>
+                <li class="elements__element">
+                    <div class="elements__image-container">
+                        <img src="./images/Elbrus.png" alt="Эльбрус" class="elements__image">
+                    </div>
+                    <div class="elements__subtitle-container">
+                        <p class="elements__subtitle">
+                            Гора Эльбрус
+                        </p>
+                        <div class="elements__like-container"></div>
+                    </div>
+                </li>
+                <li class="elements__element">
+                    <div class="elements__image-container">
+                        <img src="./images/Dombay.png" alt="Домбай" class="elements__image">
+                    </div>
+                    <div class="elements__subtitle-container">
+                        <p class="elements__subtitle">
+                            Домбай
+                        </p>
+                        <div class="elements__like-container"></div>
+                    </div>
+                </li>
+                <li class="elements__element">
+                    <div class="elements__image-container">
+                        <img src="./images/Karachaevsk.jpg" alt="Карачаево-Ч..." class="elements__image">
+                    </div>
+                    <div class="elements__subtitle-container">
+                        <p class="elements__subtitle">
+                            Карачаево-Черкессия
+                        </p>
+                        <div class="elements__like-container"></div>
+                    </div>
+                </li>
+            </ul>
+
+
+        </div>
+        <div class="footer">
+            <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+        </div>
+
+        <div class="popup popup_opened">
+
+            <div class="popup__container">
+                <input class="popup__button-close" type="button" value="Закрыть">
+                <form action="#" class="popup__form">
+                    <h2 class="popup__title">Редактировать профиль</h2>
+                    <fieldset class="popup__input-container">
+
+                        <input class="popup__item" type="text" id="Name" name="heading" placeholder="Имя" required>
+
+                        <input class="popup__item" type="text" id="Info" name="Info" placeholder="О себе" required>
+                    </fieldset>
+                    <input class="popup__button" type="submit" value="Сохранить">
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

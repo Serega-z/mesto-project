@@ -1,0 +1,15 @@
+.elements__subtitle {
+  color: #000;
+  font-size: 1.875vw;
+  margin: 0;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 320px) {
+  .elements__subtitle {
+    font-size: 24px;
+  }
+}

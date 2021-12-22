@@ -1,0 +1,9 @@
+.elements__image-container {
+  width: 22.115vw;
+}
+
+@media screen and (max-width: 320px) {
+  .elements__image-container {
+    width: 282px;
+  }
+}
