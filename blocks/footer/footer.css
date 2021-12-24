@@ -1,5 +1,6 @@
 .footer {
-  margin: 5.35vw 15.5vw 0;
+  max-width: 880px;
+  margin: 5.35vw 15.55vw 0;
   padding-bottom: 4.4vw;
 }
 

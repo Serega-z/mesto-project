@@ -1,9 +1,12 @@
 .profile {
-  margin: 36.25px 15.5vw;
+  max-width: 880px;
+  margin: 36.25px 15.55vw 0;
   display: grid;
-  grid-template-columns: min-content max-content 1fr min-content;
+  grid-template-columns: 1fr min-content;
+
   align-items: center;
-  grid-column-gap: 2.7vw;
+  /* grid-column-gap: 2.7vw; */
+  justify-content: space-between;
 }
 
 @media screen and (max-width: 320px) {

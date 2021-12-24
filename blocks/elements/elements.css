@@ -1,9 +1,11 @@
 .elements {
+  max-width: 880px;
+  justify-content: center;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin: 4.1vw 15.5vw;
-  grid-column-gap: 1rem;
-  grid-row-gap: 22px;
+  grid-column-gap: 1.5vw;
+  grid-row-gap: 1.5vw;
   list-style-type: none;
   padding: 0;
 }
@@ -12,5 +14,6 @@
   .elements {
     grid-template-columns: 1fr;
     margin: 36px auto;
+    grid-row-gap: 7vw;
   }
 }

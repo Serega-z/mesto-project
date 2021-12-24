@@ -3,14 +3,15 @@
   grid-template-columns: 1fr;
   grid-template-rows: repeat(2, 1fr);
   align-self: end;
-  grid-column-gap: 1.65vw;
+  grid-column-gap: 1.39vw;
+  margin-left: 25px;
 }
 
 @media screen and (max-width: 320px) {
   .profile__info {
     grid-row: 2;
     grid-column-gap: 10px;
-    margin: 28px auto 0;
+    margin: 25px auto 0;
     align-self: center;
   }
 }

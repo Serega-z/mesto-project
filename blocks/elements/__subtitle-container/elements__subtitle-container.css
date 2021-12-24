@@ -1,12 +1,12 @@
 .elements__subtitle-container {
   display: grid;
   grid-template-columns: 1fr min-content;
-  margin: 1.5vw 1.85vw 2.1vw;
+  margin: 1.85vw 1.85vw 2.1vw;
   align-items: center;
 }
 
 @media screen and (max-width: 320px) {
   .elements__subtitle-container {
-    margin: 22px 20px 26px;
+    margin: 26px 20px 26px;
   }
 }
