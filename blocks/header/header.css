@@ -1,9 +1,16 @@
 .header {
   max-width: 880px;
   padding-top: 3.6vw;
-  margin: 0 15.55vw 0;
+  margin: 0 auto 0;
   border-bottom: 1px solid #545454;
   padding-bottom: 3vw;
+  width: 100%;
+}
+
+@media screen and (max-width: 960px) {
+  .header {
+    margin: 0 5vw;
+  }
 }
 
 @media screen and (max-width: 320px) {

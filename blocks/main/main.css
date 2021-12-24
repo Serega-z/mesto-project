@@ -1,5 +1,12 @@
 .main {
-  margin: 3vw auto 0;
+  margin: 0 auto;
+  flex: 1 0 auto;
+}
+
+@media screen and (max-width: 960px) {
+  .main {
+    margin: 0 5vw;
+  }
 }
 
 @media screen and (max-width: 320px) {

@@ -3,7 +3,7 @@
   justify-content: center;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  margin: 4.1vw 15.5vw;
+  margin: 4.1vw auto;
   grid-column-gap: 1.5vw;
   grid-row-gap: 1.5vw;
   list-style-type: none;

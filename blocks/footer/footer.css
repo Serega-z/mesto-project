@@ -1,7 +1,15 @@
 .footer {
   max-width: 880px;
-  margin: 5.35vw 15.55vw 0;
+  margin: 1.35vw auto 0;
   padding-bottom: 4.4vw;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+@media screen and (max-width: 960px) {
+  .footer {
+    margin: 0 5vw;
+  }
 }
 
 @media screen and (max-width: 320px) {
