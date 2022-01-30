@@ -14,3 +14,10 @@
   opacity: 0;
   transition: visibility 0.5s, opacity 0.5s linear;
 }
+
+@media screen and (max-width: 320px) {
+  .popup {
+    width: 100%;
+    max-width: 320px;
+  }
+}

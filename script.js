@@ -14,6 +14,8 @@ const card = document.querySelector("#card").content;
 const elements = document.querySelector(".elements");
 const locationName = document.querySelector("#location");
 const image = document.querySelector("#image");
+const imageLink = popupLocationImage.querySelector(".popup__image");
+const imageInfo = popupLocationImage.querySelector(".popup__image-info");
 
 const initialCards = [
   {
@@ -72,36 +74,37 @@ function handleProfileFormSubmit(evt) {
   closePopup();
 }
 
-function createCards() {
+function renderCards() {
   initialCards.forEach(function (item) {
     elements.append(createCard(item.name, item.link));
   });
 }
 
 function createCard(cardName, cardLink) {
-  const newCard = card.cloneNode(true);
+  const cardImage = card.cloneNode(true);
+  const imageLink = popupLocationImage.querySelector(".popup__image");
+  const imageInfo = popupLocationImage.querySelector(".popup__image-info");
 
-  newCard.querySelector(".elements__image").src = cardLink;
-  newCard.querySelector(".elements__image").alt = cardName;
-  newCard.querySelector(".elements__subtitle").textContent = cardName;
+  cardImage.querySelector(".elements__image").src = cardLink;
+  cardImage.querySelector(".elements__image").alt = cardName;
+  cardImage.querySelector(".elements__subtitle").textContent = cardName;
 
-  newCard
+  cardImage
     .querySelector(".elements__delete-container")
     .addEventListener("click", deleteCard);
 
-  newCard
+  cardImage
     .querySelector(".elements__like-container")
     .addEventListener("click", addRemoveLike);
 
-  newCard
+  cardImage
     .querySelector(".elements__image")
     .addEventListener("click", openImage);
 
-  return newCard;
+  return cardImage;
 }
 
 function handleNewLocationFormSubmit(evt) {
-  
   evt.preventDefault();
 
   elements.prepend(createCard(locationName.value, image.value));
@@ -112,7 +115,7 @@ function handleNewLocationFormSubmit(evt) {
 }
 
 function deleteCard(evt) {
-  const currentLocation = evt.target.parentElement;
+  const currentLocation = evt.target.closest(".elements__element");
   currentLocation.remove();
 }
 
@@ -121,18 +124,12 @@ function addRemoveLike(evt) {
 }
 
 function addEventsButtonClose() {
-  
-   document
-    .querySelectorAll(".popup__button-close")
-    .forEach((item) => {
-      item.addEventListener("click", closePopup);
-    });
-
+  document.querySelectorAll(".popup__button-close").forEach((item) => {
+    item.addEventListener("click", closePopup);
+  });
 }
 
 function openImage(evt) {
-  const imageLink = popupLocationImage.querySelector(".popup__image");
-  const imageInfo = popupLocationImage.querySelector(".popup__image-info");
   imageLink.src = evt.target.currentSrc;
   imageLink.alt = evt.target.alt;
   imageInfo.textContent = evt.target.alt;
@@ -140,8 +137,7 @@ function openImage(evt) {
   openPopup(popupLocationImage);
 }
 
-
-createCards();
+renderCards();
 
 buttonEdit.addEventListener("click", openPopupProfile);
 buttonAdd.addEventListener("click", openPopupAddLocation);
@@ -149,5 +145,3 @@ popupAddLocation.addEventListener("submit", handleNewLocationFormSubmit);
 popupProfile.addEventListener("submit", handleProfileFormSubmit);
 
 addEventsButtonClose();
-
-

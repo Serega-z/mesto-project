@@ -4,7 +4,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin: 4.1vw auto;
-  grid-column-gap: 1.5vw;
+  grid-column-gap: 1rem;
   grid-row-gap: 1.5vw;
   list-style-type: none;
   padding: 0;
@@ -13,7 +13,8 @@
 @media screen and (max-width: 320px) {
   .elements {
     grid-template-columns: 1fr;
-    margin: 36px auto;
-    grid-row-gap: 7vw;
+    margin: 36px 18px;
+    grid-row-gap: 5vw;
+    grid-column-gap: 0;
   }
 }

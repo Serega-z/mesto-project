@@ -3,13 +3,16 @@
   overflow: hidden;
   border-radius: 4%;
   position: relative;
-  max-width: 22vw;
-  max-height: 38vh;
+  max-width: 23.5vw;
+  max-width: 23.5vw;
+  
 }
 
 @media screen and (max-width: 320px) {
   .elements__element {
     grid-template-columns: 1fr;
-    margin: 0 20px;
+    margin: 0;
+    max-width: 108vw;
+    max-height: 45vh;
   }
 }
