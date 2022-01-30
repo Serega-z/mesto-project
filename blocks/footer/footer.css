@@ -6,11 +6,9 @@
   flex-shrink: 0;
 }
 
-
-
 @media screen and (max-width: 320px) {
   .footer {
-    margin: 46px 20px 0;
+    margin: 0.625rem 1.1875rem 0;
     padding-bottom: 28px;
   }
 }
