@@ -81,27 +81,24 @@ function renderCards() {
 }
 
 function createCard(cardName, cardLink) {
-  const cardImage = card.cloneNode(true);
-  const imageLink = popupLocationImage.querySelector(".popup__image");
-  const imageInfo = popupLocationImage.querySelector(".popup__image-info");
+  const newCard = card.cloneNode(true);
+  const cardImage = newCard.querySelector(".elements__image");
 
-  cardImage.querySelector(".elements__image").src = cardLink;
-  cardImage.querySelector(".elements__image").alt = cardName;
-  cardImage.querySelector(".elements__subtitle").textContent = cardName;
+  cardImage.src = cardLink;
+  cardImage.alt = cardName;
+  newCard.querySelector(".elements__subtitle").textContent = cardName;
 
-  cardImage
+  newCard
     .querySelector(".elements__delete-container")
     .addEventListener("click", deleteCard);
 
-  cardImage
+  newCard
     .querySelector(".elements__like-container")
     .addEventListener("click", addRemoveLike);
 
-  cardImage
-    .querySelector(".elements__image")
-    .addEventListener("click", openImage);
+  cardImage.addEventListener("click", openImage);
 
-  return cardImage;
+  return newCard;
 }
 
 function handleNewLocationFormSubmit(evt) {

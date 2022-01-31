@@ -5,7 +5,15 @@
   position: relative;
   max-width: 23.5vw;
   max-width: 23.5vw;
-  
+}
+
+@media screen and (max-width: 800px) {
+  .elements__element {
+    grid-template-columns: 1fr;
+    margin: 0;
+    max-width: 36vw;
+    max-height: 45vh;
+  }
 }
 
 @media screen and (max-width: 320px) {

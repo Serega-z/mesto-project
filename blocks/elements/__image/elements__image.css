@@ -4,6 +4,12 @@
   max-height: 18rem;
 }
 
+@media screen and (max-width: 800px) {
+  .elements__image {
+    height: 40vw;
+  }
+}
+
 @media screen and (max-width: 320px) {
   .elements__image {
     height: 88vw;

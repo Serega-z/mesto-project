@@ -10,6 +10,14 @@
   padding: 0;
 }
 
+@media screen and (max-width: 800px) {
+  .elements {
+    grid-template-columns:repeat(2, 1fr) ;
+    margin: 1vw 0;
+    grid-row-gap: 3vw;
+    grid-column-gap: 16px;
+  }
+
 @media screen and (max-width: 320px) {
   .elements {
     grid-template-columns: 1fr;

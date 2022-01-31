@@ -7,6 +7,21 @@
   margin-left: 25px;
 }
 
+@media screen and (max-width: 800px) {
+  .profile__info {
+    grid-row: 2;
+    grid-column-gap: 10px;
+    margin: 12px;
+    align-self: center;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .profile__info {
+    margin: 6px;
+  }
+}
+
 @media screen and (max-width: 320px) {
   .profile__info {
     grid-row: 2;
