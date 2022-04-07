@@ -21,7 +21,8 @@
                 <div class="profile__info-container">
 
                     <div class="profile__avatar-container">
-                        <img src="<%=require('../src/images/cousteau.jpg')%>" alt="Жак-Ив Кусто" class="profile__avatar">
+                        <img src="<%=require('../src/images/cousteau.jpg')%>" alt="Жак-Ив Кусто"
+                            class="profile__avatar">
                         <button type="button" class="profile__button_edit-avatar"></button>
                     </div>
 
@@ -43,7 +44,8 @@
             <ul class="elements">
                 <template id="card">
                     <li class="elements__element" id="cardId">
-                        <img src="<%=require('../src/images/karachaevsk.jpg')%>" alt="Карачаевск" class="elements__image">
+                        <img src="<%=require('../src/images/karachaevsk.jpg')%>" alt="Карачаевск"
+                            class="elements__image">
                         <div class="elements__subtitle-container">
                             <p class="elements__subtitle">
                                 Карачаевск
@@ -92,8 +94,8 @@
                 <form action="#" class="popup__form" name="profile" novalidate>
                     <h2 class="popup__title">Обновить аватар</h2>
                     <fieldset class="popup__input-container">
-                        <input class="popup__item" type="url" id="newAvatar" name="Info" placeholder="Ссылка на картинку"
-                            required>
+                        <input class="popup__item" type="url" id="newAvatar" name="Info"
+                            placeholder="Ссылка на картинку" required>
                         <span class="newAvatar-error"></span>
                     </fieldset>
                     <button class="popup__button" type="submit" id="button-profile-submit">Сохранить</button>

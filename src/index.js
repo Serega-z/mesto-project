@@ -8,13 +8,8 @@ const popupProfile = document.querySelector("#profile");
 const popupEditAvatar = document.querySelector("#editAvatar");
 export const popupDelete = document.querySelector("#deleteCard");
 const popupAddLocation = document.querySelector("#addLocation");
-// const popupLocationImage = document.querySelector("#locationImage");
-// const buttonAvatarSubmit = document.querySelector("#button-avatar-submit");
-// const buttonProfileSubmit = document.querySelector("#button-profile-submit");
-// const buttonLocationSubmit = document.querySelector("#button-location-submit");
 const nameElement = document.forms.profile.elements.name;
 const aboutElement = document.querySelector("#info");
-// const newAvatar = document.querySelector("#newAvatar");
 export const author = document.querySelector(".profile__title");
 export const authorAvatar = document.querySelector(".profile__avatar");
 export const aboutAuthor = document.querySelector(".profile__subtitle");
@@ -22,10 +17,8 @@ export const aboutAuthor = document.querySelector(".profile__subtitle");
 export const locationName = document.querySelector("#location");
 export const image = document.querySelector("#image");
 
-
 export let profileId;
 
-//----------------------
 import {
   getProfile,
   editAvatar,
@@ -36,8 +29,6 @@ import {
 import { setEventListeners } from "./components/validate.js";
 import { openPopup, closePopup } from "./components/modal.js";
 import { removeCard } from "./components/api.js";
-
-//----------------------
 
 function enableValidation() {
   const formList = Array.from(document.querySelectorAll(".popup__form"));
