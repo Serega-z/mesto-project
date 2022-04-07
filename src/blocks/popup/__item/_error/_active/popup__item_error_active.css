@@ -1,0 +1,5 @@
+.popup__item_error_active {
+    margin: 0;
+    color: red;
+    font-size: 12px;
+}
