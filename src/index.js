@@ -1,4 +1,4 @@
-import "./pages/index.css";
+//import "./pages/index.css";
 
 const buttonEdit = document.querySelector(".profile__button_edit");
 const buttonAdd = document.querySelector(".profile__button_add");
@@ -19,16 +19,58 @@ export const image = document.querySelector("#image");
 
 export let profileId;
 
+
+const initialCards = [
+  {
+    name: "Архыз",
+
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
+  },
+
+  {
+    name: "Челябинская область",
+
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
+  },
+
+  {
+    name: "Иваново",
+
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
+  },
+
+  {
+    name: "Камчатка",
+
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
+  },
+
+  {
+    name: "Холмогорский район",
+
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
+  },
+
+  {
+    name: "Байкал",
+
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+  },
+];
+
 import {
   getProfile,
   editAvatar,
-  renderCards,
   editProfile,
   addLocation,
+  getCards,
+  removeCard,
 } from "./components/api.js";
+
+
 import { setEventListeners } from "./components/validate.js";
 import { openPopup, closePopup } from "./components/modal.js";
-import { removeCard } from "./components/api.js";
+import { elements, createCard } from './components/card.js'
 
 function enableValidation() {
   const formList = Array.from(document.querySelectorAll(".popup__form"));
@@ -83,14 +125,14 @@ function addEventsButtonClose() {
 }
 
 function renderProfile() {
-  getProfile();
+  //getProfile().then((res) =>createProfile(res));
 }
 
 export function createProfile(res) {
-  author.textContent = res.name;
-  authorAvatar.src = res.avatar;
-  aboutAuthor.textContent = res.about;
-  profileId = res._id;
+  // author.textContent = res.name;
+  // authorAvatar.src = res.avatar;
+  // aboutAuthor.textContent = res.about;
+  // profileId = res._id;
 }
 
 function handleDeleteFormSubmit(evt) {
@@ -113,8 +155,28 @@ function handleEditAvatarFormSubmit(evt) {
 }
 
 export function deleteCard(evt) {
-  popupDelete.id = evt.target.parentElement.id;
-  openPopup(popupDelete);
+  // popupDelete.id = evt.target.parentElement.id;
+  // openPopup(popupDelete);
+  const currentLocation = evt.target.closest(".elements__element"); 
+
+  currentLocation.remove(); 
+}
+
+function renderCards() {
+  // getCards().then((result) => {
+  //   result.forEach(function (item) {
+  //     addCard(item);
+  //   });
+  // });
+  initialCards.forEach(function (item) { 
+
+    elements.append(createCard(item)); 
+
+  }); 
+}
+
+export function addCard(item) {
+  elements.append(createCard(item));
 }
 
 renderProfile();

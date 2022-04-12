@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="../pages/index.css"> -->
+    <link rel="stylesheet" href="../src/pages/index.css">
     <title>Mesto</title>
 </head>
 
 <body>
     <div class="page">
         <header class="header">
-            <img src="<%=require('../src/images/logo.svg')%>" alt="Логотип" class="header__logo">
+            <img src="../src/images/logo.svg" alt="Логотип" class="header__logo">
         </header>
 
         <main class="main">
@@ -21,7 +21,7 @@
                 <div class="profile__info-container">
 
                     <div class="profile__avatar-container">
-                        <img src="<%=require('../src/images/cousteau.jpg')%>" alt="Жак-Ив Кусто"
+                        <img src="../src/images/cousteau.jpg" alt="Жак-Ив Кусто"
                             class="profile__avatar">
                         <button type="button" class="profile__button_edit-avatar"></button>
                     </div>
@@ -44,7 +44,7 @@
             <ul class="elements">
                 <template id="card">
                     <li class="elements__element" id="cardId">
-                        <img src="<%=require('../src/images/karachaevsk.jpg')%>" alt="Карачаевск"
+                        <img src="../src/images/karachaevsk.jpg" alt="Карачаевск"
                             class="elements__image">
                         <div class="elements__subtitle-container">
                             <p class="elements__subtitle">
@@ -98,7 +98,7 @@
                             placeholder="Ссылка на картинку" required>
                         <span class="newAvatar-error"></span>
                     </fieldset>
-                    <button class="popup__button" type="submit" id="button-profile-submit">Сохранить</button>
+                    <button class="popup__button" type="submit" id="button-avatar-submit">Сохранить</button>
 
                 </form>
             </div>
@@ -136,7 +136,7 @@
                 <form action="#" class="popup__form" name="new-card" novalidate>
                     <h2 class="popup__title">Вы уверены?</h2>
 
-                    <button class="popup__button" type="submit" id="button-location-submit">Да</button>
+                    <button class="popup__button" type="submit" id="button-delete-submit">Да</button>
 
                 </form>
 

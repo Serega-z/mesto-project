@@ -2,21 +2,14 @@ const baseUrl = "https://nomoreparties.co/v1";
 const authorizationCode = "92f03e12-2aa3-473a-b069-ac84e8ecd772";
 const cohortId = "plus-cohort-8";
 
-import { createProfile } from "../index.js";
-import { addCard } from "./card.js";
-
-export function renderCards() {
-  fetch(`${baseUrl}/${cohortId}/cards`, {
+export function getCards() {
+  return fetch(`${baseUrl}/${cohortId}/cards`, {
     headers: {
       authorization: authorizationCode,
     },
   })
-    .then((res) => res.json())
-    .then((result) => {
-      result.forEach(function (item) {
-        addCard(item);
-      });
-    });
+    .then((res) => _checkResponse(res));
+    
 }
 
 export function editAvatar() {
@@ -29,9 +22,7 @@ export function editAvatar() {
     body: JSON.stringify({
       avatar: newAvatar.value,
     }),
-  }).then((res) => {
-    return res.json();
-  });
+  }).then((res) => _checkResponse(res));
 }
 
 export function removeCard(elementId) {
@@ -41,21 +32,17 @@ export function removeCard(elementId) {
       authorization: authorizationCode,
       "Content-Type": "application/json",
     },
-  }).then((res) => {
-    return res.json();
-  });
+  }).then((res) => _checkResponse(res));
 }
 
 export function getProfile() {
-  fetch(`${baseUrl}/${cohortId}/users/me`, {
+  return fetch(`${baseUrl}/${cohortId}/users/me`, {
     headers: {
       authorization: authorizationCode,
     },
   })
-    .then((res) => res.json())
-    .then((result) => {
-      createProfile(result);
-    });
+    .then((res) => _checkResponse(res));
+    
 }
 
 export function changeLike(methodName, elementId) {
@@ -65,9 +52,7 @@ export function changeLike(methodName, elementId) {
       authorization: authorizationCode,
       "Content-Type": "application/json",
     },
-  }).then((res) => {
-    return res.json();
-  });
+  }).then((res) => _checkResponse(res));
 }
 
 export function addLocation(locationName, image) {
@@ -81,9 +66,7 @@ export function addLocation(locationName, image) {
       name: locationName,
       link: image,
     }),
-  }).then((res) => {
-    return res.json();
-  });
+  }).then((res) => _checkResponse(res));
 }
 
 export function editProfile(newName, newAbout) {
@@ -97,7 +80,12 @@ export function editProfile(newName, newAbout) {
       name: newName,
       about: newAbout,
     }),
-  }).then((res) => {
-    return res.json();
-  });
+  }).then((res) => _checkResponse(res));
+}
+
+function _checkResponse(res) {
+  if (res.ok) {
+    return res.json()
+  }
+  return Promise.reject(`Ошибка: ${res.status}`)
 }
