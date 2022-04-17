@@ -5,35 +5,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../src/pages/index.css">
+    <!-- <link rel="stylesheet" href="pages/index.css"> -->
     <title>Mesto</title>
 </head>
 
 <body>
     <div class="page">
         <header class="header">
-            <img src="../src/images/logo.svg" alt="Логотип" class="header__logo">
+            <img src="<%=require('./images/logo.svg')%>" alt="Логотип" class="header__logo">
         </header>
 
         <main class="main">
             <div class="profile">
 
                 <div class="profile__info-container">
-
-                    <div class="profile__avatar-container">
-                        <img src="../src/images/cousteau.jpg" alt="Жак-Ив Кусто"
-                            class="profile__avatar">
-                        <button type="button" class="profile__button_edit-avatar"></button>
-                    </div>
+                    <img src="<%=require('./images/cousteau.jpg')%>" alt="Жак-Ив Кусто" class="profile__avatar">
 
                     <div class="profile__info">
-
                         <h1 class="profile__title">Жак-Ив&nbsp;Кусто</h1>
                         <p class="profile__subtitle">Исследователь океана</p>
 
                         <button class="profile__button profile__button_edit" type="button"></button>
 
                     </div>
+
 
                 </div>
 
@@ -43,17 +38,13 @@
 
             <ul class="elements">
                 <template id="card">
-                    <li class="elements__element" id="cardId">
-                        <img src="../src/images/karachaevsk.jpg" alt="Карачаевск"
-                            class="elements__image">
+                    <li class="elements__element">
+                        <img src="<%=require('./images/karachaevsk.jpg')%>" alt="Карачаевск" class="elements__image">
                         <div class="elements__subtitle-container">
                             <p class="elements__subtitle">
                                 Карачаевск
                             </p>
-                            <div class="like-container">
-                                <button class="elements__like-container " type="button"></button>
-                                <p class="elements__like-count"></p>
-                            </div>
+                            <button class="elements__like-container " type="button"></button>
                         </div>
                         <button class="elements__delete-container" type="button"></button>
                     </li>
@@ -87,24 +78,6 @@
 
         </div>
 
-        <div class="popup" id="editAvatar">
-
-            <div class="popup__container">
-                <button class="popup__button-close" type="button"></button>
-                <form action="#" class="popup__form" name="profile" novalidate>
-                    <h2 class="popup__title">Обновить аватар</h2>
-                    <fieldset class="popup__input-container">
-                        <input class="popup__item" type="url" id="newAvatar" name="Info"
-                            placeholder="Ссылка на картинку" required>
-                        <span class="newAvatar-error"></span>
-                    </fieldset>
-                    <button class="popup__button" type="submit" id="button-avatar-submit">Сохранить</button>
-
-                </form>
-            </div>
-
-        </div>
-
         <div class="popup" id="addLocation">
 
             <div class="popup__container">
@@ -129,6 +102,24 @@
 
         </div>
 
+        <div class="popup" id="editAvatar">
+
+            <div class="popup__container">
+                <button class="popup__button-close" type="button"></button>
+                <form action="#" class="popup__form" name="profile" novalidate>
+                    <h2 class="popup__title">Обновить аватар</h2>
+                    <fieldset class="popup__input-container">
+                        <input class="popup__item" type="url" id="newAvatar" name="Info"
+                            placeholder="Ссылка на картинку" required>
+                        <span class="newAvatar-error"></span>
+                    </fieldset>
+                    <button class="popup__button" type="submit" id="button-profile-submit">Сохранить</button>
+
+                </form>
+            </div>
+
+        </div>
+
         <div class="popup" id="deleteCard" name="deleteCard">
 
             <div class="popup__container">
@@ -136,7 +127,7 @@
                 <form action="#" class="popup__form" name="new-card" novalidate>
                     <h2 class="popup__title">Вы уверены?</h2>
 
-                    <button class="popup__button" type="submit" id="button-delete-submit">Да</button>
+                    <button class="popup__button" type="submit" id="button-location-submit">Да</button>
 
                 </form>
 
@@ -144,6 +135,17 @@
 
         </div>
 
+        <div class="popup" id="locationImage">
+
+            <div class="popup__image-container">
+                <button class="popup__button-close" type="button"></button>
+                <form action="#" class="popup__form-image" name="location-image">
+                    <img src="#" alt="" class="popup__image">
+                    <p class="popup__image-info"></p>
+                </form>
+            </div>
+
+        </div>
 
         <div class="popup" id="locationImage">
 
@@ -158,11 +160,9 @@
         </div>
 
     </div>
-    <!-- <script type="module" src="../src/index.js"></script>
-    <script type="module" src="../src/components/api.js"></script>
-    <script type="module" src="../src/components/card.js"></script>
-    <script type="module" src="../src/components/validate.js"></script>
-    <script type="module" src="../src/components/modal.js"></script> -->
+    <!-- <script type="module" src="./index.js"></script>
+    <script type="module" src="./components/modal.js"></script>
+    <script type="module" src="./components/validate.js"></script> -->
 
 </body>
 
