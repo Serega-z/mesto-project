@@ -29,6 +29,7 @@ export const validationConfig = {
   inactivButtonClass: "popup__button_inactive",
   inputErrorClass: "popup__item_error",
   inputErrorClassActive: "popup__item_error_active",
+  activePopupClass: "popup_opened",
 };
 
 const initialCards = [

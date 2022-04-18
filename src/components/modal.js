@@ -10,17 +10,17 @@ export function openImage(evt) {
 }
 
 export function openPopup(currentPopup) {
-  currentPopup.classList.add("popup_opened");
+  currentPopup.classList.add(validationConfig.activePopupClass);
   document.addEventListener("keyup", keyHandler);
   currentPopup.addEventListener("click", mouseHandler);
 }
 
 export function closePopup() {
-  const popup = document.querySelector(".popup_opened");
+  const popup = document.querySelector(`.${validationConfig.activePopupClass}`);
 
   if (popup) {
     setEventListeners(validationConfig, popup);
-    popup.classList.remove("popup_opened");
+    popup.classList.remove(validationConfig.activePopupClass);
     document.removeEventListener("keyup", keyHandler);
     popup.removeEventListener("click", mouseHandler);
   }
