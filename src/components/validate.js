@@ -47,10 +47,10 @@ function hasInvalidInput(inputList) {
 
 function toggleButtonState(config, inputList, buttonElement) {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(config.inactivButtonClass);
+    buttonElement.classList.add(config.inactiveButtonClass);
     buttonElement.disabled = "disabled";
   } else {
-    buttonElement.classList.remove(config.inactivButtonClass);
+    buttonElement.classList.remove(config.inactiveButtonClass);
     buttonElement.disabled = "";
   }
 }

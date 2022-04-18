@@ -1,5 +1,5 @@
 import { validationConfig } from "../index.js";
-import { setEventListeners } from "./validate.js";
+
 
 export function openImage(evt) {
   imageLink.src = evt.target.currentSrc;
@@ -19,7 +19,6 @@ export function closePopup() {
   const popup = document.querySelector(`.${validationConfig.activePopupClass}`);
 
   if (popup) {
-    setEventListeners(validationConfig, popup);
     popup.classList.remove(validationConfig.activePopupClass);
     document.removeEventListener("keyup", keyHandler);
     popup.removeEventListener("click", mouseHandler);
@@ -37,3 +36,5 @@ function mouseHandler(evt) {
     closePopup();
   }
 }
+
+

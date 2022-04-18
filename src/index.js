@@ -26,7 +26,7 @@ export const validationConfig = {
   formSelector: ".popup__form",
   inputSelecotor: ".popup__item",
   submitButtonSelector: ".popup__button",
-  inactivButtonClass: "popup__button_inactive",
+  inactiveButtonClass: "popup__button_inactive",
   inputErrorClass: "popup__item_error",
   inputErrorClassActive: "popup__item_error_active",
   activePopupClass: "popup_opened",
@@ -67,6 +67,7 @@ function openPopupProfile() {
 
 function openPopupAddLocation() {
   openPopup(popupAddLocation);
+  inactiveButtonSubmit(buttonLocationSubmit);
 }
 
 function handleProfileFormSubmit(evt) {
@@ -106,7 +107,6 @@ function createCard(cardName, cardLink) {
 
 function handleNewLocationFormSubmit(evt) {
   evt.preventDefault();
-
   elements.prepend(createCard(locationName.value, image.value));
   evt.target.reset();
   closePopup();
@@ -133,6 +133,10 @@ function openImage(evt) {
   imageInfo.textContent = evt.target.alt;
 
   openPopup(popupLocationImage);
+}
+
+function inactiveButtonSubmit(buttonElement) {
+  buttonElement.classList.add(validationConfig.inactiveButtonClass);  
 }
 
 renderCards();
