@@ -1,4 +1,4 @@
-import './pages/index.css';
+import "./pages/index.css";
 
 const buttonEdit = document.querySelector(".profile__button_edit");
 const buttonAdd = document.querySelector(".profile__button_add");
@@ -20,7 +20,16 @@ const imageLink = popupLocationImage.querySelector(".popup__image");
 const imageInfo = popupLocationImage.querySelector(".popup__image-info");
 
 import { openPopup, closePopup } from "./components/modal.js";
-import { setEventListeners } from "./components/validate.js";
+import { enableValidation } from "./components/validate.js";
+
+export const validationConfig = {
+  formSelector: ".popup__form",
+  inputSelecotor: ".popup__item",
+  submitButtonSelector: ".popup__button",
+  inactivButtonClass: "popup__button_inactive",
+  inputErrorClass: "popup__item_error",
+  inputErrorClassActive: "popup__item_error_active",
+};
 
 const initialCards = [
   {
@@ -98,9 +107,7 @@ function handleNewLocationFormSubmit(evt) {
   evt.preventDefault();
 
   elements.prepend(createCard(locationName.value, image.value));
-
-  locationName.value = "";
-  image.value = "";
+  evt.target.reset();
   closePopup();
 }
 
@@ -127,19 +134,8 @@ function openImage(evt) {
   openPopup(popupLocationImage);
 }
 
-function enableValidation() {
-  const formList = Array.from(document.querySelectorAll(".popup__form"));
-
-  formList.forEach((formElement) => {
-    formElement.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-    });
-    setEventListeners(formElement);
-  });
-}
-
 renderCards();
-enableValidation();
+enableValidation(validationConfig);
 
 buttonEdit.addEventListener("click", openPopupProfile);
 buttonAdd.addEventListener("click", openPopupAddLocation);

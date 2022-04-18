@@ -1,3 +1,6 @@
+import { validationConfig } from "../index.js";
+import { setEventListeners } from "./validate.js";
+
 export function openImage(evt) {
   imageLink.src = evt.target.currentSrc;
   imageLink.alt = evt.target.alt;
@@ -16,6 +19,7 @@ export function closePopup() {
   const popup = document.querySelector(".popup_opened");
 
   if (popup) {
+    setEventListeners(validationConfig, popup);
     popup.classList.remove("popup_opened");
     document.removeEventListener("keyup", keyHandler);
     popup.removeEventListener("click", mouseHandler);
