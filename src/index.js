@@ -11,10 +11,11 @@ const popupAddLocation = document.querySelector("#addLocation");
 export const popupLocationImage = document.querySelector("#locationImage");
 const buttonProfileSubmit = document.querySelector("#button-profile-submit");
 const buttonLocationSubmit = document.querySelector("#button-location-submit");
-const buttonEditAvatarSubmit = document.querySelector("#button-edit-avatar-submit");
+const buttonEditAvatarSubmit = document.querySelector(
+  "#button-edit-avatar-submit"
+);
 const nameElement = document.forms.profile.elements.name;
 const aboutElement = document.querySelector("#info");
-
 
 const card = document.querySelector("#card").content;
 
@@ -30,8 +31,17 @@ export const aboutAuthor = document.querySelector(".profile__subtitle");
 export let profileId;
 
 import { openPopup, closePopup } from "./components/modal.js";
-import { enableValidation } from "./components/validate.js";
-import { elements, createCard } from './components/card.js'
+import {
+  enableValidation,
+  inactiveButtonSubmit,
+} from "./components/validate.js";
+
+import {
+  elements,
+  createCard,
+  deleteCardByID,
+  checkLike,
+} from "./components/card.js";
 
 export const validationConfig = {
   formSelector: ".popup__form",
@@ -50,6 +60,7 @@ import {
   addLocation,
   getCards,
   removeCard,
+  changeLike,
 } from "./components/api.js";
 
 function openPopupProfile() {
@@ -60,7 +71,7 @@ function openPopupProfile() {
 
 function openPopupAddLocation() {
   openPopup(popupAddLocation);
-  inactiveButtonSubmit(buttonLocationSubmit);
+  inactiveButtonSubmit(buttonLocationSubmit, validationConfig);
 }
 
 function openPopupEditAvatar() {
@@ -72,29 +83,39 @@ function handleProfileFormSubmit(evt) {
   const defaultText = buttonProfileSubmit.textContent;
   setLoadingInfo(true, buttonProfileSubmit, defaultText);
 
-  editProfile(nameElement.value, aboutElement.value).then((res) => {
-    author.textContent = res.name;
-    aboutAuthor.textContent = res.about;
-    setLoadingInfo(false, buttonProfileSubmit, defaultText);
-    closePopup();
-  });
-  
-
+  editProfile(nameElement.value, aboutElement.value)
+    .then((res) => {
+      author.textContent = res.name;
+      aboutAuthor.textContent = res.about;
+      closePopup();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      setLoadingInfo(false, buttonProfileSubmit, defaultText);
+    });
 }
 
 function renderCards() {
-  getCards().then((result) => {
-    result.forEach(function (item) {
-      addCard(item);
+  getCards()
+    .then((result) => {
+      result.forEach(function (item) {
+        addCard(item);
+      });
+    })
+    .catch((err) => {
+      console.log(err);
     });
-  });
 }
 
 export function addCard(item) {
-  elements.append(createCard(item));
+  elements.append(
+    createCard(item, openPopupDeleteCard, profileId, openImage, addRemoveLike)
+  );
 }
 
-export function deleteCard(evt) {
+export function openPopupDeleteCard(evt) {
   popupDelete.id = evt.target.parentElement.id;
   openPopup(popupDelete);
 }
@@ -103,35 +124,49 @@ function handleNewLocationFormSubmit(evt) {
   evt.preventDefault();
   const defaultText = buttonLocationSubmit.textContent;
   setLoadingInfo(true, buttonLocationSubmit, defaultText);
-  addLocation(locationName.value, image.value).then((res) => {
-    elements.prepend(createCard(res));
-    locationName.value = "";
-    image.value = "";
-  });
-  setLoadingInfo(false, buttonLocationSubmit, defaultText);
-  closePopup();
+  addLocation(locationName.value, image.value)
+    .then((res) => {
+      elements.prepend(createCard(res));
+      locationName.value = "";
+      image.value = "";
+      closePopup();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      setLoadingInfo(false, buttonLocationSubmit, defaultText);
+    });
 }
 
 function handleDeleteFormSubmit(evt) {
   evt.preventDefault();
   const cardId = evt.currentTarget.id;
-  removeCard(cardId).then((res) => {
-    // evt.target.id = "";
-    const currentLocation = document.getElementById(cardId);
-    currentLocation.remove();
-    closePopup();
-  });
+  removeCard(cardId)
+    .then((res) => {
+      deleteCardByID(cardId);
+      closePopup();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 function handleEditAvatarFormSubmit(evt) {
   evt.preventDefault();
   const defaultText = buttonEditAvatarSubmit.textContent;
   setLoadingInfo(true, buttonEditAvatarSubmit, defaultText);
-  editAvatar().then((res) => {
-    authorAvatar.src = res.avatar;
-    setLoadingInfo(false, buttonEditAvatarSubmit, defaultText);
-    closePopup();
-  });
+  editAvatar()
+    .then((res) => {
+      authorAvatar.src = res.avatar;
+      closePopup();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      setLoadingInfo(false, buttonEditAvatarSubmit, defaultText);
+    });
 }
 
 function addEventsButtonClose() {
@@ -141,7 +176,10 @@ function addEventsButtonClose() {
 }
 
 function renderProfile() {
-  getProfile().then((res) => createProfile(res));
+  getProfile().then((res) => {
+    createProfile(res);
+    renderCards();
+  });
 }
 
 export function createProfile(res) {
@@ -151,23 +189,41 @@ export function createProfile(res) {
   profileId = res._id;
 }
 
-function inactiveButtonSubmit(buttonElement) {
-  buttonElement.classList.add(validationConfig.inactiveButtonClass);  
-}
-
 function setLoadingInfo(isLoading, currentButton, defaultText) {
-
   if (isLoading) {
-    currentButton.textContent = "Сохранение..."; 
-  }
-  else {
-    currentButton.textContent = defaultText; 
+    currentButton.textContent = "Сохранение...";
+  } else {
+    currentButton.textContent = defaultText;
   }
 }
 
-renderCards();
-enableValidation(validationConfig);
+export function openImage(evt) {
+  imageLink.src = evt.target.currentSrc;
+  imageLink.alt = evt.target.alt;
+  imageInfo.textContent = evt.target.alt;
+
+  openPopup(popupLocationImage);
+}
+
+function addRemoveLike(evt) {
+  const currentElement = evt.target.closest(".elements__element");
+  const elementId = currentElement.id;
+  const liked = evt.target.classList.contains("elements__like-container-liked");
+  const likeCount = currentElement.querySelector(".elements__like-count");
+
+  let methodName = "PUT";
+  if (liked) {
+    methodName = "DELETE";
+  }
+
+  changeLike(methodName, elementId).then((res) => {
+    checkLike(likeCount,evt,res);
+  });
+}
+
 renderProfile();
+
+enableValidation(validationConfig);
 
 buttonEdit.addEventListener("click", openPopupProfile);
 buttonAdd.addEventListener("click", openPopupAddLocation);

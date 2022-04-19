@@ -1,15 +1,15 @@
 export const elements = document.querySelector(".elements");
 const card = document.querySelector("#card").content;
 
-import { profileId, deleteCard } from "../index.js";
 import { changeLike } from "./api.js";
-import { openImage } from "./modal.js";
 
-export function addCard(item) {
-  elements.append(createCard(item));
-}
-
-export function createCard(res) {
+export function createCard(
+  res,
+  openPopupDeleteCard,
+  profileId,
+  openImage,
+  addRemoveLike
+) {
   const newCard = card.cloneNode(true);
   const cardImage = newCard.querySelector(".elements__image");
   const cadrLike = newCard.querySelector(".elements__like-count");
@@ -33,9 +33,7 @@ export function createCard(res) {
 
   newCard.querySelector(".elements__subtitle").textContent = res.name;
 
-  newCard
-    .querySelector(".elements__delete-container")
-    .addEventListener("click", deleteCard);
+  deleteButton.addEventListener("click", openPopupDeleteCard);
 
   likeContainer.addEventListener("click", addRemoveLike);
 
@@ -44,19 +42,12 @@ export function createCard(res) {
   return newCard;
 }
 
-function addRemoveLike(evt) {
-  const currentElement = evt.target.closest(".elements__element");
-  const elementId = currentElement.id;
-  const liked = evt.target.classList.contains("elements__like-container-liked");
-  const likeCount = currentElement.querySelector(".elements__like-count");
+export function checkLike(likeCount, evt, res) {
+  likeCount.textContent = res.likes.length;
+  evt.target.classList.toggle("elements__like-container-liked");
+}
 
-  let methodName = "PUT";
-  if (liked) {
-    methodName = "DELETE";
-  }
-
-  changeLike(methodName, elementId).then((res) => {
-    likeCount.textContent = res.likes.length;
-    evt.target.classList.toggle("elements__like-container-liked");
-  });
+export function deleteCardByID(cardId) {
+  const currentLocation = document.getElementById(cardId);
+  currentLocation.remove();
 }

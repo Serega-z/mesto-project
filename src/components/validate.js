@@ -1,5 +1,3 @@
-
-
 function showInputError(config, formElement, inputElement, errorMessage) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
 
@@ -18,18 +16,25 @@ function hideInputError(config, formElement, inputElement) {
 
 function isValid(config, formElement, inputElement) {
   if (!inputElement.validity.valid) {
-    showInputError(config, formElement, inputElement, inputElement.validationMessage);
+    showInputError(
+      config,
+      formElement,
+      inputElement,
+      inputElement.validationMessage
+    );
   } else {
     hideInputError(config, formElement, inputElement);
   }
 }
 
 export function setEventListeners(config, formElement) {
-  const inputList = Array.from(formElement.querySelectorAll(config.inputSelecotor));
+  const inputList = Array.from(
+    formElement.querySelectorAll(config.inputSelecotor)
+  );
 
   const buttonElement = formElement.querySelector(config.submitButtonSelector);
 
-  toggleButtonState(config,inputList, buttonElement);
+  toggleButtonState(config, inputList, buttonElement);
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
@@ -66,3 +71,6 @@ export function enableValidation(config) {
   });
 }
 
+export function inactiveButtonSubmit(buttonElement, validationConfig) {
+  buttonElement.classList.add(validationConfig.inactiveButtonClass);
+}
