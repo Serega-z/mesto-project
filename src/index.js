@@ -4,23 +4,34 @@ const buttonEdit = document.querySelector(".profile__button_edit");
 const buttonAdd = document.querySelector(".profile__button_add");
 
 const popupProfile = document.querySelector("#profile");
+const popupEditAvatar = document.querySelector("#editAvatar");
+const buttonEditAvatar = document.querySelector(".profile__button_edit-avatar");
+export const popupDelete = document.querySelector("#deleteCard");
 const popupAddLocation = document.querySelector("#addLocation");
-const popupLocationImage = document.querySelector("#locationImage");
+export const popupLocationImage = document.querySelector("#locationImage");
 const buttonProfileSubmit = document.querySelector("#button-profile-submit");
 const buttonLocationSubmit = document.querySelector("#button-location-submit");
+const buttonEditAvatarSubmit = document.querySelector("#button-edit-avatar-submit");
 const nameElement = document.forms.profile.elements.name;
 const aboutElement = document.querySelector("#info");
-const author = document.querySelector(".profile__title");
-const aboutAuthor = document.querySelector(".profile__subtitle");
+
+
 const card = document.querySelector("#card").content;
-const elements = document.querySelector(".elements");
+
 const locationName = document.querySelector("#location");
 const image = document.querySelector("#image");
-const imageLink = popupLocationImage.querySelector(".popup__image");
-const imageInfo = popupLocationImage.querySelector(".popup__image-info");
+export const imageLink = popupLocationImage.querySelector(".popup__image");
+export const imageInfo = popupLocationImage.querySelector(".popup__image-info");
+
+export const author = document.querySelector(".profile__title");
+export const authorAvatar = document.querySelector(".profile__avatar");
+export const aboutAuthor = document.querySelector(".profile__subtitle");
+
+export let profileId;
 
 import { openPopup, closePopup } from "./components/modal.js";
 import { enableValidation } from "./components/validate.js";
+import { elements, createCard } from './components/card.js'
 
 export const validationConfig = {
   formSelector: ".popup__form",
@@ -32,32 +43,14 @@ export const validationConfig = {
   activePopupClass: "popup_opened",
 };
 
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
+import {
+  getProfile,
+  editAvatar,
+  editProfile,
+  addLocation,
+  getCards,
+  removeCard,
+} from "./components/api.js";
 
 function openPopupProfile() {
   nameElement.value = author.innerText;
@@ -70,55 +63,75 @@ function openPopupAddLocation() {
   inactiveButtonSubmit(buttonLocationSubmit);
 }
 
+function openPopupEditAvatar() {
+  openPopup(popupEditAvatar);
+}
+
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
+  const defaultText = buttonProfileSubmit.textContent;
+  setLoadingInfo(true, buttonProfileSubmit, defaultText);
 
-  author.textContent = nameElement.value;
-  aboutAuthor.textContent = aboutElement.value;
-  closePopup();
+  editProfile(nameElement.value, aboutElement.value).then((res) => {
+    author.textContent = res.name;
+    aboutAuthor.textContent = res.about;
+    setLoadingInfo(false, buttonProfileSubmit, defaultText);
+    closePopup();
+  });
+  
+
 }
 
 function renderCards() {
-  initialCards.forEach(function (item) {
-    elements.append(createCard(item.name, item.link));
+  getCards().then((result) => {
+    result.forEach(function (item) {
+      addCard(item);
+    });
   });
 }
 
-function createCard(cardName, cardLink) {
-  const newCard = card.cloneNode(true);
-  const cardImage = newCard.querySelector(".elements__image");
+export function addCard(item) {
+  elements.append(createCard(item));
+}
 
-  cardImage.src = cardLink;
-  cardImage.alt = cardName;
-  newCard.querySelector(".elements__subtitle").textContent = cardName;
-
-  newCard
-    .querySelector(".elements__delete-container")
-    .addEventListener("click", deleteCard);
-
-  newCard
-    .querySelector(".elements__like-container")
-    .addEventListener("click", addRemoveLike);
-
-  cardImage.addEventListener("click", openImage);
-
-  return newCard;
+export function deleteCard(evt) {
+  popupDelete.id = evt.target.parentElement.id;
+  openPopup(popupDelete);
 }
 
 function handleNewLocationFormSubmit(evt) {
   evt.preventDefault();
-  elements.prepend(createCard(locationName.value, image.value));
-  evt.target.reset();
+  const defaultText = buttonLocationSubmit.textContent;
+  setLoadingInfo(true, buttonLocationSubmit, defaultText);
+  addLocation(locationName.value, image.value).then((res) => {
+    elements.prepend(createCard(res));
+    locationName.value = "";
+    image.value = "";
+  });
+  setLoadingInfo(false, buttonLocationSubmit, defaultText);
   closePopup();
 }
 
-function deleteCard(evt) {
-  const currentLocation = evt.target.closest(".elements__element");
-  currentLocation.remove();
+function handleDeleteFormSubmit(evt) {
+  evt.preventDefault();
+  const cardId = evt.currentTarget.id;
+  removeCard(cardId).then((res) => {
+    // evt.target.id = "";
+    const currentLocation = document.getElementById(cardId);
+    currentLocation.remove();
+    closePopup();
+  });
 }
 
-function addRemoveLike(evt) {
-  evt.target.classList.toggle("elements__like-container-liked");
+function handleEditAvatarFormSubmit(evt) {
+  evt.preventDefault();
+  const defaultText = buttonEditAvatarSubmit.textContent;
+  setLoadingInfo(true, buttonEditAvatarSubmit, defaultText);
+  editAvatar().then((res) => {
+    authorAvatar.src = res.avatar;
+    setLoadingInfo(false, buttonEditAvatarSubmit, defaultText);
+    closePopup();
+  });
 }
 
 function addEventsButtonClose() {
@@ -127,24 +140,41 @@ function addEventsButtonClose() {
   });
 }
 
-function openImage(evt) {
-  imageLink.src = evt.target.currentSrc;
-  imageLink.alt = evt.target.alt;
-  imageInfo.textContent = evt.target.alt;
+function renderProfile() {
+  getProfile().then((res) => createProfile(res));
+}
 
-  openPopup(popupLocationImage);
+export function createProfile(res) {
+  author.textContent = res.name;
+  authorAvatar.src = res.avatar;
+  aboutAuthor.textContent = res.about;
+  profileId = res._id;
 }
 
 function inactiveButtonSubmit(buttonElement) {
   buttonElement.classList.add(validationConfig.inactiveButtonClass);  
 }
 
+function setLoadingInfo(isLoading, currentButton, defaultText) {
+
+  if (isLoading) {
+    currentButton.textContent = "Сохранение..."; 
+  }
+  else {
+    currentButton.textContent = defaultText; 
+  }
+}
+
 renderCards();
 enableValidation(validationConfig);
+renderProfile();
 
 buttonEdit.addEventListener("click", openPopupProfile);
 buttonAdd.addEventListener("click", openPopupAddLocation);
+buttonEditAvatar.addEventListener("click", openPopupEditAvatar);
 popupAddLocation.addEventListener("submit", handleNewLocationFormSubmit);
 popupProfile.addEventListener("submit", handleProfileFormSubmit);
+popupEditAvatar.addEventListener("submit", handleEditAvatarFormSubmit);
+popupDelete.addEventListener("submit", handleDeleteFormSubmit);
 
 addEventsButtonClose();

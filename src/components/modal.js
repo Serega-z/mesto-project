@@ -1,5 +1,5 @@
 import { validationConfig } from "../index.js";
-
+import { imageLink, imageInfo, popupLocationImage } from "../index.js";
 
 export function openImage(evt) {
   imageLink.src = evt.target.currentSrc;
