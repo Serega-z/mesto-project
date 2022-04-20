@@ -5,6 +5,7 @@
   height: 19px;
   transition: opacity 0.5s ease;
   border: 0;
+  margin-top: 4px;
 }
 
 .elements__like-container:hover {

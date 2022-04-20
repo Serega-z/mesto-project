@@ -4,7 +4,7 @@
   grid-template-rows: repeat(2, 1fr);
   align-self: end;
   grid-column-gap: 1.39vw;
-  margin-left: 25px;
+  margin-left: 28px;
 }
 
 @media screen and (max-width: 800px) {

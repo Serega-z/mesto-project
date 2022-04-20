@@ -73,4 +73,5 @@ export function enableValidation(config) {
 
 export function inactiveButtonSubmit(buttonElement, validationConfig) {
   buttonElement.classList.add(validationConfig.inactiveButtonClass);
+  buttonElement.disabled = "disabled";
 }

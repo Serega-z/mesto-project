@@ -1,57 +1,43 @@
 import "./pages/index.css";
 
-const buttonEdit = document.querySelector(".profile__button_edit");
-const buttonAdd = document.querySelector(".profile__button_add");
-
-const popupProfile = document.querySelector("#profile");
-const popupEditAvatar = document.querySelector("#editAvatar");
-const buttonEditAvatar = document.querySelector(".profile__button_edit-avatar");
-export const popupDelete = document.querySelector("#deleteCard");
-const popupAddLocation = document.querySelector("#addLocation");
-export const popupLocationImage = document.querySelector("#locationImage");
-const buttonProfileSubmit = document.querySelector("#button-profile-submit");
-const buttonLocationSubmit = document.querySelector("#button-location-submit");
-const buttonEditAvatarSubmit = document.querySelector(
-  "#button-edit-avatar-submit"
-);
-const nameElement = document.forms.profile.elements.name;
-const aboutElement = document.querySelector("#info");
-
-const card = document.querySelector("#card").content;
-
-const locationName = document.querySelector("#location");
-const image = document.querySelector("#image");
-export const imageLink = popupLocationImage.querySelector(".popup__image");
-export const imageInfo = popupLocationImage.querySelector(".popup__image-info");
-
-export const author = document.querySelector(".profile__title");
-export const authorAvatar = document.querySelector(".profile__avatar");
-export const aboutAuthor = document.querySelector(".profile__subtitle");
-
-export let profileId;
-
 import { openPopup, closePopup } from "./components/modal.js";
+
+import {
+  validationConfig,
+  elements,
+  imageLink,
+  imageInfo,
+  author,
+  authorAvatar,
+  aboutAuthor,
+  locationName,
+  image,
+  nameElement,
+  aboutElement,
+  buttonAdd,
+  buttonEdit,
+  buttonEditAvatar,
+  buttonProfileSubmit,
+  buttonLocationSubmit,
+  buttonEditAvatarSubmit,
+  popupAddLocation,
+  popupEditAvatar,
+  popupDelete,
+  popupLocationImage,
+  popupProfile,
+} from "./components/constants.js";
+
 import {
   enableValidation,
   inactiveButtonSubmit,
 } from "./components/validate.js";
 
 import {
-  elements,
+  
   createCard,
   deleteCardByID,
   checkLike,
 } from "./components/card.js";
-
-export const validationConfig = {
-  formSelector: ".popup__form",
-  inputSelecotor: ".popup__item",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_inactive",
-  inputErrorClass: "popup__item_error",
-  inputErrorClassActive: "popup__item_error_active",
-  activePopupClass: "popup_opened",
-};
 
 import {
   getProfile,
@@ -62,6 +48,8 @@ import {
   removeCard,
   changeLike,
 } from "./components/api.js";
+
+let currentUserId = "";
 
 function openPopupProfile() {
   nameElement.value = author.innerText;
@@ -111,7 +99,7 @@ function renderCards() {
 
 export function addCard(item) {
   elements.append(
-    createCard(item, openPopupDeleteCard, profileId, openImage, addRemoveLike)
+    createCard(item, openPopupDeleteCard, currentUserId, openImage, addRemoveLike)
   );
 }
 
@@ -186,7 +174,7 @@ export function createProfile(res) {
   author.textContent = res.name;
   authorAvatar.src = res.avatar;
   aboutAuthor.textContent = res.about;
-  profileId = res._id;
+  currentUserId = res._id;
 }
 
 function setLoadingInfo(isLoading, currentButton, defaultText) {
@@ -217,7 +205,7 @@ function addRemoveLike(evt) {
   }
 
   changeLike(methodName, elementId).then((res) => {
-    checkLike(likeCount,evt,res);
+    checkLike(likeCount, evt, res);
   });
 }
 

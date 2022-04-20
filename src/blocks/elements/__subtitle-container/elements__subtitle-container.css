@@ -1,7 +1,7 @@
 .elements__subtitle-container {
   display: grid;
   grid-template-columns: 1fr min-content;
-  margin: 1.85vw 1.85vw 2.1vw;
+  margin: 1vw 1.6vw 1.2vw;
   align-items: center;
 }
 

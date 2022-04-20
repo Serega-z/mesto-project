@@ -1,6 +1,4 @@
-const baseUrl = "https://nomoreparties.co/v1";
-const authorizationCode = "92f03e12-2aa3-473a-b069-ac84e8ecd772";
-const cohortId = "plus-cohort-8";
+import { baseUrl, authorizationCode, cohortId } from "./constants.js";
 
 export function getCards() {
   return fetch(`${baseUrl}/${cohortId}/cards`, {

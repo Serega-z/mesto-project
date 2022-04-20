@@ -1,7 +1,4 @@
-import { validationConfig } from "../index.js";
-import { imageLink, imageInfo, popupLocationImage } from "../index.js";
-
-
+import { validationConfig } from "./constants.js";
 
 export function openPopup(currentPopup) {
   currentPopup.classList.add(validationConfig.activePopupClass);

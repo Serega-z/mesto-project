@@ -1,7 +1,5 @@
-export const elements = document.querySelector(".elements");
-const card = document.querySelector("#card").content;
 
-import { changeLike } from "./api.js";
+import { card, elements } from "./constants.js";
 
 export function createCard(
   res,
