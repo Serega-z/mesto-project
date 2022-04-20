@@ -2,7 +2,7 @@
   max-width: 880px;
   margin: 1.35vw auto 0;
   padding-bottom: 4.4vw;
-  width: 100%;
+  /* width: 100%; */
   flex-shrink: 0;
 }
 

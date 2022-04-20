@@ -49,7 +49,7 @@ import {
   changeLike,
 } from "./components/api.js";
 
-let currentUserId = "";
+ let currentUserId = "";
 
 function openPopupProfile() {
   nameElement.value = author.innerText;

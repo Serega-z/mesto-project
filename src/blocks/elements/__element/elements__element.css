@@ -5,6 +5,7 @@
   position: relative;
   max-width: 23.5vw;
   max-width: 23.5vw;
+  display: grid;
 }
 
 @media screen and (max-width: 800px) {

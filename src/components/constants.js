@@ -2,7 +2,7 @@ export const baseUrl = "https://nomoreparties.co/v1";
 export const authorizationCode = "92f03e12-2aa3-473a-b069-ac84e8ecd772";
 export const cohortId = "plus-cohort-8";
 
-export var currentUserId = "";
+export let currentUserId = "";
 
 
 export const card = document.querySelector("#card").content;
